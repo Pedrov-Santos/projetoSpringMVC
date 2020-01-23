@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="LayoutPadrao">
+<head>
+<title>Cadastro de Titulo</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<form class="card" method="POST" action="/titulos">
+
+		<div class="alert alert-success"
+			th:if="${!#strings.isEmpty(mensagem)}">
+
+			<span th:text="${mensagem}"></span>
+		</div>
+
+		<div class="card card-body">
+			<div class="card-body">
+				<div class= "clearfix">
+			<h2 class="card-title aw-titulo-card">Novo titulo</h2>
+			<a class="btn btn-link aw-link-card"href="/titulos">Voltar para pesquisa</a>
+		</div>
+			</div>
+			<div class="card card-body">
+
+				<div class="form-group row">
+					<label for="descricao" class="col-sm-2 control-label">Descrição</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="descricao"
+							name='descricao' placeholder="col-form-label">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="dataVencimento" class="col-sm-2 control-label">Data
+						de vencimento</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="dataVencimento"
+							name='dataVencimento' placeholder="col-form-label">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="valor" class="col-sm-2 control-label">Valor</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="valor" name='valor'
+							placeholder="col-form-label">
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="status" class="col-sm-2 control-label">Status</label>
+					<div class="col-sm-2">
+						<select class="form-control" name='status'>
+
+							<option th:each="status : ${todosStatusTitulo}"
+								th:value="${status}" th:text="${status.descricao}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<button type="submit" class="btn btn-outline-primary">Salvar</button>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</form>
+
+</section>
+
+</html>

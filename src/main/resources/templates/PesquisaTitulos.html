@@ -22,12 +22,12 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="text-center">#</th>
-						<th class="text-center col-md-2">Descrição</th>
-						<th class="text-center ">Data de vencimento</th>
-						<th class="text-center col-md-2">Valor</th>
-						<th class="text-center col-md-2">Status</th>
-						<th class=" col-md-1"></th>
+						<th class="text-center"width="10%">#</th>
+						<th class="text-center ">Descrição</th>
+						<th class="text-center "width="15%">Data de vencimento</th>
+						<th class="text-center "width="10%">Valor</th>
+						<th class="text-center "width="10%">Status</th>
+						<th class=""></th>
 
 
 					</tr>
@@ -37,7 +37,7 @@
 						<td class="text-center" th:text="${titulo.codigo}">1</td>
 						<td th:text="${titulo.descricao}"></td>
 						<td class="text-center" th:text="${{titulo.dataVencimento}}"></td>
-						<td class="text-center" th:text="|R$${{titulo.valor}}|"></td>
+						<td class="text-center" th:text="|R$ ${{titulo.valor}}|"></td>
 						<td class="text-center" >
 							<span class="badge " th:text="${titulo.status.descricao}"
 							th:classappend= "${titulo.pendente ? 'badge-danger' : 'badge-success'}">

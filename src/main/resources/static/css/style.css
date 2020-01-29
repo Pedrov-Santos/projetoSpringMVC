@@ -1,6 +1,12 @@
 .navbar-brand {
 	padding-top: 8px;
 }
+.has-error{
+	color:red;
+	
+}
+
+}
 .card card-body {
 	margin-left: 10px;
 	margin-right: 10px;

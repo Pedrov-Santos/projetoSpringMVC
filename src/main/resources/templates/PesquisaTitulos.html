@@ -8,7 +8,7 @@
 </head>
 
 <section layout:fragment="conteudo">
-
+<div layout:insert="MensagemGeral"></div>
 
 	<div class="card card-body">
 		<div class="card-body">
@@ -44,6 +44,17 @@
 							</span>
 						</td>
 						<td class="text-center" >
+						<a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}"
+							>
+							<span class=" "><img
+			src="/images/Editar.PNG" width="30" height="30"></span>
+						</a>
+						
+						<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal"
+						th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}">
+							<span  ><img
+			src="/images/excluir.PNG" width="30" height="30"></span>
+						</a>
 						
 						</td>
 					
@@ -54,6 +65,9 @@
 				</tbody>
 			</table>
 		</div>
+		
+		<div layout:insert="DialogoConfirmacaoExclusao"></div>
+		
 	</div>
 
 </section>

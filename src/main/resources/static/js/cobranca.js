@@ -19,3 +19,7 @@
 	 
 	 
  });
+ 
+ $(function(){
+	$('[rel="tooltip"]').tooltip(); 
+ });

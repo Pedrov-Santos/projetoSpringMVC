@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -45,13 +46,16 @@ public class TituloController {
 			return CADASTRO_VIEW;
 		}
 		// salvar no banco de dados
+		try {
 		titulos.save(titulo);
-		
 		attributes.addFlashAttribute("mensagem", "Titulo salvo com sucesso!");
-		
 		//mv.addObject("todosStatusTitulo", StatusTitulo.values());
 		return "redirect:/titulos/novo";
-	}
+		} catch (DataIntegrityViolationException e) {
+			errors.rejectValue("dataVencimento", null, "Formato de data invalido");
+			return CADASTRO_VIEW;
+		}
+		}
 	@RequestMapping
 	public ModelAndView pesquisar() {
 		List<Titulo> todosTitulos = titulos.findAll();

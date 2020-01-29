@@ -44,14 +44,16 @@
 							</span>
 						</td>
 						<td class="text-center" >
-						<a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}"
+						<a class="btn btn-link btn-xs" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}" title="Editar" 
+						rel="tooltip" data-placement='top'
 							>
 							<span class=" "><img
 			src="/images/Editar.PNG" width="30" height="30"></span>
 						</a>
 						
 						<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal"
-						th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}">
+						th:attr="data-codigo=${titulo.codigo}, data-descricao=${titulo.descricao}"
+						title="Excluir" rel="tooltip" data-placement='top'>
 							<span  ><img
 			src="/images/excluir.PNG" width="30" height="30"></span>
 						</a>

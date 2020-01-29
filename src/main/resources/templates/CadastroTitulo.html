@@ -37,7 +37,8 @@
 						de vencimento</label>
 					<div class="col-sm-2">
 						<input type="text" class="form-control" th:classappend="${#fields.hasErrors('valor')} ? is-invalid" id="dataVencimento"
-							th:field="*{dataVencimento}"  placeholder="ex: 10/10/2020">
+							th:field="*{dataVencimento}"  placeholder="ex: 10/10/2020" data-provide="datepicker" date-date-format="dd/mm/yyyy"
+							data-date-language="pt-BR" data-date-autoclose="true" date-date-today-highlight="true" data-date-orientation='bottom'/>
 					</div>
 				</div>
 				<div class="form-group row" th:classappend="${#fields.hasErrors('valor')} ? has-error">

@@ -13,22 +13,31 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.gft.cobranca.model.StatusTitulo;
 import com.gft.cobranca.model.Titulo;
 import com.gft.cobranca.repository.Titulos;
+import com.gft.cobranca.repository.filter.TituloFilter;
+import com.gft.cobranca.service.CadastroTituloService;
 
 
 @Controller
 @RequestMapping("/titulos")
 public class TituloController {
 	
+	
 	private static final String CADASTRO_VIEW = "CadastroTitulo";
 	
 	@Autowired
 	private Titulos titulos;
+	
+	@Autowired
+	private CadastroTituloService cadastroTituloService;
+	
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo() {
@@ -47,18 +56,21 @@ public class TituloController {
 		}
 		// salvar no banco de dados
 		try {
-		titulos.save(titulo);
+		cadastroTituloService.salvar(titulo);
 		attributes.addFlashAttribute("mensagem", "Titulo salvo com sucesso!");
 		//mv.addObject("todosStatusTitulo", StatusTitulo.values());
 		return "redirect:/titulos/novo";
-		} catch (DataIntegrityViolationException e) {
-			errors.rejectValue("dataVencimento", null, "Formato de data invalido");
+		} catch (IllegalArgumentException e) {
+			errors.rejectValue("dataVencimento", null, e.getMessage());
 			return CADASTRO_VIEW;
 		}
 		}
 	@RequestMapping
-	public ModelAndView pesquisar() {
-		List<Titulo> todosTitulos = titulos.findAll();
+	public ModelAndView pesquisar(@ModelAttribute("filtro")TituloFilter filtro) {
+		String descricao = filtro.getDescricao() == null ? "%" : filtro.getDescricao();
+		List<Titulo> todosTitulos = titulos.findByDescricaoContaining(descricao);
+		
+		
 		ModelAndView mv = new ModelAndView("PesquisaTitulos");
 		mv.addObject("titulos", todosTitulos);
 		return mv;
@@ -73,12 +85,17 @@ public class TituloController {
 	
 	@RequestMapping(value="{codigo}",method = RequestMethod.POST)
 	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
-		titulos.deleteById(codigo);
+		cadastroTituloService.excluir(codigo);
+		
 		attributes.addFlashAttribute("mensagem", "Titulo excluido com sucesso!");
 		return"redirect:/titulos";
 	}
 	
-	
+	@RequestMapping(value= "/{codigo}/receber", method = RequestMethod.PUT)
+	public @ResponseBody String receber(@PathVariable Long codigo) {
+		return cadastroTituloService.receber(codigo);
+		
+	}
 	
 	@ModelAttribute("todosStatusTitulo")
 	public List<StatusTitulo> todosStatusTitulo(){

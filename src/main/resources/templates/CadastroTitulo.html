@@ -38,20 +38,20 @@
 					<div class="col-sm-2">
 						<input type="text" class="form-control" th:classappend="${#fields.hasErrors('valor')} ? is-invalid" id="dataVencimento"
 							th:field="*{dataVencimento}"  placeholder="ex: 10/10/2020" data-provide="datepicker" date-date-format="dd/mm/yyyy"
-							data-date-language="pt-BR" data-date-autoclose="true" date-date-today-highlight="true" data-date-orientation='bottom'/>
+							data-date-language="pt-BR" data-date-autoclose="true" date-date-today-highlight="true" data-date-orientation="bottom"/>
 					</div>
 				</div>
 				<div class="form-group row" th:classappend="${#fields.hasErrors('valor')} ? has-error">
 					<label for="valor" class="col-sm-2 control-label">Valor</label>
 					<div class="col-sm-2">
-						<input type="text" class="form-control" th:classappend="${#fields.hasErrors('valor')} ? is-invalid" id="valor" th:field="*{valor}"
-							placeholder="ex: 300,00">
+						<input type="text" class="form-control js-currency" th:classappend="${#fields.hasErrors('valor')} ? is-invalid" id="valor" th:field="*{valor}"
+							placeholder="ex: 300,00"/>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="status" class="col-sm-2 control-label">Status</label>
 					<div class="col-sm-2">
-						<select class="form-control" name='status'>
+						<select class="form-control" name='status' th:field="*{status}">
 
 							<option th:each="status : ${todosStatusTitulo}"
 								th:value="${status}" th:text="${status.descricao}"></option>

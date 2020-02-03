@@ -1,21 +1,27 @@
+/*Tela grande*/
+@media(min-width: 768px){
+	.card card-body {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.alert{
+		margin-left:10px;
+		margin-right:10px;
+		margin-top:10px;
+	}
+	.has-error{
+		color:red;
+	}
+
+}
+
+
 .navbar-brand {
 	padding-top: 8px;
 }
-.has-error{
-	color:red;
-	
-}
 
 }
-.card card-body {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-.alert{
-	margin-left:10px;
-	margin-right:10px;
-	margin-top:10px;
-}
+
 .aw-link-card{
 	float: right;
 	padding: 0px;

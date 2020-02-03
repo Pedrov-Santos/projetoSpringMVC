@@ -32,8 +32,7 @@ public class TituloController {
 	
 	private static final String CADASTRO_VIEW = "CadastroTitulo";
 	
-	@Autowired
-	private Titulos titulos;
+
 	
 	@Autowired
 	private CadastroTituloService cadastroTituloService;
@@ -67,8 +66,7 @@ public class TituloController {
 		}
 	@RequestMapping
 	public ModelAndView pesquisar(@ModelAttribute("filtro")TituloFilter filtro) {
-		String descricao = filtro.getDescricao() == null ? "%" : filtro.getDescricao();
-		List<Titulo> todosTitulos = titulos.findByDescricaoContaining(descricao);
+		List<Titulo> todosTitulos = cadastroTituloService.filtrar(filtro);
 		
 		
 		ModelAndView mv = new ModelAndView("PesquisaTitulos");

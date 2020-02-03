@@ -13,8 +13,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
@@ -26,7 +28,7 @@ public class Titulo {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long codigo;
 		
-		@NotNull(message ="Descrição é obrigatório")
+		@NotEmpty(message ="Descrição é obrigatório")
 		@Size(max= 60, message= "A descrição não pode conter mais de 90 caracteres")
 		private String descricao;
 		
